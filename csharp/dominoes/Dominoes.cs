@@ -22,6 +22,7 @@ public static class Dominoes
             return current == start;
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         for (int i = 0; i < remaining.Count; i++)
         {
             var domino = remaining[i];
@@ -45,6 +46,9 @@ public static class Dominoes
 }
 =======
         foreach (var(left,right) in dominoesList)
+=======
+        for (int i = 0; i < remaining.Count; i++)
+>>>>>>> bd2b272 (same)
         {
             
         }
