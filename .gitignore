@@ -1,7 +1,13 @@
 **
 
+!*/
+
 !.gitignore
 
 !**/*.cs
 
 **/*Tests.cs
+
+**/[Bb]in/
+**/[Oo]bj/
+**/.idea/
