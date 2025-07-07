@@ -6,7 +6,10 @@ public static class Dominoes
     {
         var dominoesList = dominoes.ToList();
         if (dominoesList.Count == 0) return true;
+<<<<<<< HEAD
         
+=======
+>>>>>>> 0ae2a71 (Second backup)
         var start = dominoesList[0];
         var rest = dominoesList.Skip(1).ToList();
 
@@ -18,6 +21,7 @@ public static class Dominoes
         if (remaining.Count == 0)
             return current == start;
         
+<<<<<<< HEAD
         for (int i = 0; i < remaining.Count; i++)
         {
             var domino = remaining[i];
@@ -39,3 +43,12 @@ public static class Dominoes
         return false;
     }
 }
+=======
+        foreach (var(left,right) in dominoesList)
+        {
+            
+        }
+        
+    }
+}
+>>>>>>> 0ae2a71 (Second backup)
