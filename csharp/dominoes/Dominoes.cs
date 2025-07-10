@@ -7,9 +7,13 @@ public static class Dominoes
         var dominoesList = dominoes.ToList();
         if (dominoesList.Count == 0) return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
 >>>>>>> 0ae2a71 (Second backup)
+=======
+        
+>>>>>>> da43846 (Changed dominoes)
         var start = dominoesList[0];
         var rest = dominoesList.Skip(1).ToList();
 
@@ -39,6 +43,7 @@ public static class Dominoes
                 if (CanChainRecursive(domino.Item1, rest, start))
                     return true;
             }
+<<<<<<< HEAD
         }
 
         return false;
@@ -51,8 +56,11 @@ public static class Dominoes
 >>>>>>> bd2b272 (same)
         {
             
+=======
+>>>>>>> da43846 (Changed dominoes)
         }
-        
+
+        return false;
     }
 }
 >>>>>>> 0ae2a71 (Second backup)
