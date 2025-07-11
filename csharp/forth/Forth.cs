@@ -5,7 +5,7 @@ public static class Forth
         Stack<int> stack = new Stack<int>();
 
         var tokens = instructions.ToLower().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        
+
         foreach (var token in tokens)
         {
             var lowerToken = token.ToLower();
@@ -21,30 +21,30 @@ public static class Forth
                 case "+":
                     if (stack.Count < 2)
                         throw new InvalidOperationException();
-                    var b = stack.Pop();
                     var a = stack.Pop();
-                    stack.Push(a + b);
+                    var b = stack.Pop();
+                    stack.Push(b + a);
                     break;
                 case "-":
                     if (stack.Count < 2)
                         throw new InvalidOperationException();
-                    b = stack.Pop();
                     a = stack.Pop();
-                    stack.Push(a - b);
+                    b = stack.Pop();
+                    stack.Push(b - a);
                     break;
                 case "*":
                     if (stack.Count < 2)
                         throw new InvalidOperationException();
                     a = stack.Pop();
                     b = stack.Pop();
-                    stack.Push(a * b);
+                    stack.Push(b * a);
                     break;
                 case "/":
                     if (stack.Count < 2)
                         throw new InvalidOperationException();
                     a = stack.Pop();
                     b = stack.Pop();
-                    if (b == 0)
+                    if (a == 0)
                         throw new DivideByZeroException();
                     stack.Push(b / a);
                     break;
@@ -83,7 +83,7 @@ public static class Forth
 
     public static string Evaluate(string[] instructions)
     {
-        var words = new Dictionary<string,string[]>();
+        var words = new Dictionary<string, string[]>();
 
         var definitions = instructions[..^1];
         var toEvaluate = instructions[^1].ToLower();
@@ -92,18 +92,18 @@ public static class Forth
         {
             var def = definition.ToLower()[1..^1].Trim().Split(" ");
             var key = def[0];
-            if(int.TryParse(key, out _)) throw new InvalidOperationException();
-            var replacements = def[1..]
-                .Select(d => words.TryGetValue(d, out var word) ? string.Join(' ', word) : d)
-                .ToArray();
+            if (int.TryParse(key, out _)) throw new InvalidOperationException();
+            var replacements = Replace(def[1..], words);
+                
             words[key] = replacements;
         }
 
-        foreach (var mapping in words)
-        {
-            toEvaluate = toEvaluate.Replace(mapping.Key, string.Join(' ', mapping.Value));
-        }
-        
-        return EvaluateInternal(toEvaluate);
+        var replaced = string.Join(' ', Replace(toEvaluate.Split(" "), words));
+            
+        return EvaluateInternal(replaced);
     }
+
+    private static string[] Replace(string[] strings, Dictionary<string, string[]> words) =>
+        strings.Select(d => words.TryGetValue(d, out var word) ? string.Join(' ', word) : d)
+            .ToArray();
 }
